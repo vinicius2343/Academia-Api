@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>EcoSaúde Digital — Cartilha</title>
+  <meta name="description" content="Cartilha EcoSaúde Digital: descarte adequado de resíduos e impactos na saúde e no meio ambiente." />
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --surface: rgba(255,255,255,.06);
+      --surface2: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --border: rgba(255,255,255,.14);
+
+      --brand1: #22c55e;  /* green */
+      --brand2: #38bdf8;  /* sky */
+      --brand3: #a78bfa;  /* violet */
+      --warn: #f59e0b;    /* amber */
+      --danger: #fb7185;  /* rose */
+      --ok: #34d399;      /* emerald */
+
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1100px;
+
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f6f7fb;
+        --surface: rgba(10, 20, 40, .05);
+        --surface2: rgba(10, 20, 40, .09);
+        --text: rgba(10, 20, 40, .92);
+        --muted: rgba(10, 20, 40, .70);
+        --border: rgba(10, 20, 40, .14);
+        --shadow: 0 18px 50px rgba(10,20,40,.12);
+      }
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(56,189,248,.22), transparent 55%),
+        radial-gradient(1000px 700px at 90% 0%, rgba(167,139,250,.18), transparent 55%),
+        radial-gradient(900px 700px at 50% 100%, rgba(34,197,94,.18), transparent 50%),
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.10)),
+        var(--bg);
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 22px; }
+    .grid{
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap: 18px;
+      align-items:start;
+    }
+    @media (max-width: 960px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Top bar */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--bg) 70%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .brand{
+      display:flex; gap: 12px; align-items:center;
+      min-width: 240px;
+    }
+    .logo{
+      width: 38px; height: 38px; border-radius: 12px;
+      background:
+        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.55), transparent 50%),
+        conic-gradient(from 210deg, var(--brand1), var(--brand2), var(--brand3), var(--brand1));
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .brand h1{
+      margin:0;
+      font-size: 14px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      opacity: .95;
+    }
+    .brand p{
+      margin:0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .actions{
+      display:flex; gap: 10px; align-items:center; flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+    .chip{
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 8px 10px;
+      border-radius: 999px;
+      display:inline-flex;
+      gap: 8px;
+      align-items:center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .btn{
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface2), var(--surface));
+      padding: 9px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      color: var(--text);
+      font-weight: 650;
+      letter-spacing: .2px;
+      transition: transform .08s ease, border-color .2s ease, background .2s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--brand2) 45%, var(--border));
+      text-decoration: none;
+    }
+    .btn:active{ transform: translateY(0px); }
+
+    /* Hero */
+    .hero{
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      padding: 22px;
+      background:
+        radial-gradient(1200px 500px at 10% 20%, rgba(56,189,248,.18), transparent 60%),
+        radial-gradient(1000px 600px at 90% 0%, rgba(167,139,250,.16), transparent 60%),
+        linear-gradient(180deg, var(--surface2), var(--surface));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: linear-gradient(90deg,
+        rgba(34,197,94,.12),
+        rgba(56,189,248,.12),
+        rgba(167,139,250,.12)
+      );
+      filter: blur(22px);
+      opacity: .7;
+      z-index: 0;
+    }
+    .hero > *{ position: relative; z-index: 1; }
+
+    .kicker{
+      display:flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 10px;
+    }
+    .tag{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .title{
+      margin: 6px 0 6px;
+      font-size: clamp(26px, 3.5vw, 42px);
+      line-height: 1.1;
+      letter-spacing: -0.8px;
+    }
+    .subtitle{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 70ch;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 700px){
+      .hero-grid{ grid-template-columns: 1fr; }
+    }
+
+    .stat{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .stat b{
+      display:block;
+      font-size: 12px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .stat span{
+      display:block;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* Sidebar */
+    .sidebar{
+      position: sticky;
+      top: 72px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, var(--surface2), var(--surface));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    @media (max-width: 960px){
+      .sidebar{ position: relative; top: 0; }
+    }
+
+    .side-head{
+      padding: 16px 16px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .side-head h2{
+      margin:0;
+      font-size: 14px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .toc{
+      padding: 10px 10px 14px;
+      display:grid;
+      gap: 6px;
+    }
+    .toc a{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      padding: 10px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      color: var(--text);
+      background: transparent;
+      transition: background .15s ease, border-color .2s ease, transform .08s ease;
+    }
+    .toc a:hover{
+      background: rgba(255,255,255,.06);
+      border-color: var(--border);
+      transform: translateY(-1px);
+      text-decoration:none;
+    }
+    .dot{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: color-mix(in srgb, var(--brand2) 55%, transparent);
+      box-shadow: 0 0 0 3px rgba(56,189,248,.14);
+      flex: 0 0 auto;
+    }
+
+    .side-footer{
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Main content */
+    main{ display:grid; gap: 14px; }
+
+    .card{
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, var(--surface2), var(--surface));
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    section.card{ scroll-margin-top: 92px; }
+
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+    .card p{
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+    .muted{ color: var(--muted); }
+
+    .callout{
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 14px;
+      background: rgba(255,255,255,.05);
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      margin-top: 10px;
+    }
+    .icon{
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.55), transparent 50%),
+        linear-gradient(135deg, rgba(34,197,94,.28), rgba(56,189,248,.22));
+      flex: 0 0 auto;
+    }
+    .callout b{ display:block; margin-bottom: 4px; }
+    .callout p{ margin: 0; color: var(--muted); }
+
+    .list{
+      display:grid;
+      gap: 10px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .li{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .li .k{
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      align-items:center;
+      margin-bottom: 6px;
+    }
+    .badge{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      white-space: nowrap;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 850px){
+      .two-col{ grid-template-columns: 1fr; }
+    }
+
+    .quote{
+      margin: 14px 0 0;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(34,197,94,.13), rgba(56,189,248,.10), rgba(167,139,250,.10));
+      position: relative;
+      overflow:hidden;
+    }
+    .quote::before{
+      content:"“";
+      position:absolute;
+      top:-18px;
+      left: 10px;
+      font-size: 80px;
+      opacity: .18;
+    }
+    .quote p{
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+      font-weight: 700;
+    }
+    .quote small{
+      display:block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .refs{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .refs li{ margin: 6px 0; }
+
+    /* Back to top */
+    .to-top{
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface2), var(--surface));
+      color: var(--text);
+      padding: 10px 12px;
+      box-shadow: var(--shadow);
+      cursor:pointer;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .2s ease, transform .2s ease;
+      z-index: 60;
+      font-weight: 700;
+    }
+    .to-top.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Print */
+    @media print{
+      .topbar, .sidebar, .to-top { display: none !important; }
+      body{ background: #fff; color:#000; }
+      .card, .hero{ box-shadow: none; }
+      a{ text-decoration: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar" id="topo">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>EcoSaúde Digital</h1>
+          <p>Descarte adequado de resíduos • Saúde • Sustentabilidade</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <span class="chip" title="Projeto de Extensão Acadêmica">
+          <span aria-hidden="true">📘</span>
+          Projeto de Extensão • 2026
+        </span>
+        <button class="btn" id="btnImprimir" type="button" title="Imprimir ou salvar como PDF">Imprimir / PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="kicker">
+        <span class="tag">Saúde Pública</span>
+        <span class="tag">Meio Ambiente</span>
+        <span class="tag">Sustentabilidade</span>
+        <span class="tag">Educação Ambiental</span>
+      </div>
+
+      <h2 class="title">Descarte adequado de resíduos e seus impactos na saúde e no meio ambiente</h2>
+      <p class="subtitle">
+        Esta cartilha foi criada para apoiar a conscientização sobre o manejo correto de resíduos sólidos,
+        incentivando hábitos sustentáveis e reduzindo riscos ambientais e sanitários no dia a dia.
+      </p>
+
+      <div class="hero-grid">
+        <div class="stat">
+          <b>Instituição</b>
+          <span>Projeto Acadêmico de Extensão Universitária</span>
+        </div>
+        <div class="stat">
+          <b>Mensagem-chave</b>
+          <span>Pequenas atitudes individuais geram grandes impactos coletivos.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top: 18px;">
+      <aside class="sidebar" aria-label="Sumário">
+        <div class="side-head">
+          <h2>Sumário</h2>
+        </div>
+
+        <nav class="toc">
+          <a href="#apresentacao"><span class="dot"></span><span>1. Apresentação</span></a>
+          <a href="#por-que"><span class="dot"></span><span>2. Por que falar sobre resíduos?</span></a>
+          <a href="#tipos"><span class="dot"></span><span>3. Tipos de resíduos</span></a>
+          <a href="#como-descartar"><span class="dot"></span><span>4. Como descartar corretamente</span></a>
+          <a href="#impactos"><span class="dot"></span><span>5. Impactos do descarte incorreto</span></a>
+          <a href="#beneficios"><span class="dot"></span><span>6. Benefícios do descarte correto</span></a>
+          <a href="#conclusao"><span class="dot"></span><span>7. Conclusão</span></a>
+          <a href="#referencias"><span class="dot"></span><span>Referências</span></a>
+        </nav>
+
+        <div class="side-footer">
+          Dica: use o botão <b>Imprimir / PDF</b> para gerar uma versão pronta para entrega.
+        </div>
+      </aside>
+
+      <main>
+        <section id="apresentacao" class="card">
+          <h3>1. Apresentação</h3>
+          <p>
+            A cartilha <b>EcoSaúde Digital</b> foi desenvolvida como instrumento educativo voltado à
+            conscientização sobre o descarte adequado de resíduos sólidos.
+          </p>
+          <p class="muted">
+            Objetivo: promover conhecimento acessível à população, incentivando práticas sustentáveis e
+            reduzindo impactos ambientais e sanitários.
+          </p>
+
+          <div class="callout">
+            <div class="icon" aria-hidden="true"></div>
+            <div>
+              <b>Por que isso importa?</b>
+              <p>
+                Segundo a <b>ONU</b>, a gestão inadequada de resíduos é um dos principais desafios ambientais
+                do século XXI, afetando diretamente a saúde global.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="por-que" class="card">
+          <h3>2. Por que falar sobre resíduos?</h3>
+
+          <ul class="list">
+            <li class="li">
+              <div class="k">
+                <b>Grande produção diária de resíduos urbanos</b>
+                <span class="badge">Realidade</span>
+              </div>
+              <span class="muted">O volume de resíduos cresce com consumo, urbanização e descarte acelerado.</span>
+            </li>
+
+            <li class="li">
+              <div class="k">
+                <b>Descarte incorreto em vias públicas e rios</b>
+                <span class="badge" style="border-color: color-mix(in srgb, var(--brand2) 40%, var(--border));">
+                  Ambiente
+                </span>
+              </div>
+              <span class="muted">Atinge drenagens, cursos d’água e aumenta a poluição.</span>
+            </li>
+
+            <li class="li">
+              <div class="k">
+                <b>Risco de proliferação de doenças infecciosas</b>
+                <span class="badge" style="border-color: color-mix(in srgb, var(--danger) 45%, var(--border));">
+                  Saúde
+                </span>
+              </div>
+              <span class="muted">Resíduos expostos favorecem vetores (mosquitos, roedores) e contaminações.</span>
+            </li>
+
+            <li class="li">
+              <div class="k">
+                <b>Poluição do solo, ar e recursos hídricos</b>
+                <span class="badge" style="border-color: color-mix(in srgb, var(--warn) 45%, var(--border));">
+                  Impacto
+                </span>
+              </div>
+              <span class="muted">Queima e decomposição inadequadas geram gases e substâncias nocivas.</span>
+            </li>
+          </ul>
+
+          <div class="callout">
+            <div class="icon" aria-hidden="true" style="background:linear-gradient(135deg, rgba(245,158,11,.22), rgba(56,189,248,.20));"></div>
+            <div>
+              <b>Base teórica</b>
+              <p>
+                Sachs (2008) destaca que o desenvolvimento sustentável depende da integração entre
+                crescimento econômico, justiça social e preservação ambiental.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="tipos" class="card">
+          <h3>3. Tipos de resíduos</h3>
+
+          <div class="two-col">
+            <div class="li">
+              <div class="k"><b>Recicláveis</b><span class="badge" style="border-color: color-mix(in srgb, var(--brand2) 55%, var(--border));">coleta seletiva</span></div>
+              <span class="muted">Papel, plástico, vidro e metal.</span>
+            </div>
+
+            <div class="li">
+              <div class="k"><b>Orgânicos</b><span class="badge" style="border-color: color-mix(in srgb, var(--brand1) 55%, var(--border));">compostagem</span></div>
+              <span class="muted">Restos de alimentos e matéria biodegradável.</span>
+            </div>
+
+            <div class="li">
+              <div class="k"><b>Rejeitos</b><span class="badge">destinação final</span></div>
+              <span class="muted">Materiais não recicláveis.</span>
+            </div>
+
+            <div class="li">
+              <div class="k"><b>Perigosos</b><span class="badge" style="border-color: color-mix(in srgb, var(--danger) 55%, var(--border));">atenção</span></div>
+              <span class="muted">Pilhas, baterias e medicamentos.</span>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="icon" aria-hidden="true" style="background:linear-gradient(135deg, rgba(167,139,250,.22), rgba(34,197,94,.18));"></div>
+            <div>
+              <b>Observação</b>
+              <p>
+                Veiga (2005) destaca que a correta classificação dos resíduos é essencial para a eficiência
+                dos sistemas de gestão ambiental urbana.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="como-descartar" class="card">
+          <h3>4. Como descartar corretamente</h3>
+
+          <ul class="list">
+            <li class="li">
+              <div class="k"><b>Separar resíduos orgânicos e recicláveis</b><span class="badge">Passo 1</span></div>
+              <span class="muted">Use recipientes diferentes e identifique com etiquetas, se possível.</span>
+            </li>
+            <li class="li">
+              <div class="k"><b>Utilizar a coleta seletiva sempre que disponível</b><span class="badge">Passo 2</span></div>
+              <span class="muted">Consulte dias/rotas do seu bairro e mantenha os materiais secos.</span>
+            </li>
+            <li class="li">
+              <div class="k"><b>Evitar a mistura de materiais contaminantes</b><span class="badge">Passo 3</span></div>
+              <span class="muted">Resíduos contaminados podem inviabilizar a reciclagem de um lote inteiro.</span>
+            </li>
+            <li class="li">
+              <div class="k"><b>Encaminhar resíduos perigosos a pontos de coleta específicos</b><span class="badge">Passo 4</span></div>
+              <span class="muted">Procure farmácias, ecopontos e programas municipais de logística reversa.</span>
+            </li>
+          </ul>
+
+          <div class="callout">
+            <div class="icon" aria-hidden="true"></div>
+            <div>
+              <b>Educação ambiental</b>
+              <p>A educação ambiental é fundamental para transformar hábitos individuais em impacto coletivo positivo.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="impactos" class="card">
+          <h3>5. Impactos do descarte incorreto</h3>
+
+          <div class="two-col">
+            <div class="li">
+              <div class="k"><b>Doenças</b><span class="badge" style="border-color: color-mix(in srgb, var(--danger) 55%, var(--border));">Risco</span></div>
+              <span class="muted">Aumento de doenças como dengue e leptospirose, entre outras associadas a vetores.</span>
+            </div>
+            <div class="li">
+              <div class="k"><b>Contaminação</b><span class="badge" style="border-color: color-mix(in srgb, var(--warn) 55%, var(--border));">Grave</span></div>
+              <span class="muted">Contaminação do solo e da água por chorume, substâncias químicas e microplásticos.</span>
+            </div>
+            <div class="li">
+              <div class="k"><b>Enchentes</b><span class="badge">Urbano</span></div>
+              <span class="muted">Entupimento de bueiros e drenagens, aumentando o risco de alagamentos.</span>
+            </div>
+            <div class="li">
+              <div class="k"><b>Degradação</b><span class="badge">Qualidade de vida</span></div>
+              <span class="muted">Mau cheiro e degradação de áreas públicas, afetando o bem-estar coletivo.</span>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="icon" aria-hidden="true" style="background:linear-gradient(135deg, rgba(251,113,133,.18), rgba(245,158,11,.18));"></div>
+            <div>
+              <b>Base teórica</b>
+              <p>
+                Ianoski (2012) afirma que problemas ambientais urbanos estão diretamente ligados à ausência de
+                educação ambiental e infraestrutura adequada.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="beneficios" class="card">
+          <h3>6. Benefícios do descarte correto</h3>
+
+          <ul class="list">
+            <li class="li">
+              <div class="k"><b>Redução de doenças e melhoria da saúde pública</b><span class="badge" style="border-color: color-mix(in srgb, var(--ok) 55%, var(--border));">Saúde pública</span></div>
+              <span class="muted">Menos criadouros de vetores e menor exposição a agentes contaminantes.</span>
+            </li>
+            <li class="li">
+              <div class="k"><b>Preservação de recursos naturais</b><span class="badge">Economia circular</span></div>
+              <span class="muted">A reciclagem e a compostagem reduzem a extração de matérias-primas.</span>
+            </li>
+            <li class="li">
+              <div class="k"><b>Diminuição da poluição ambiental</b><span class="badge">Impacto</span></div>
+              <span class="muted">Menos resíduos em rios e vias públicas, e menor contaminação do solo e da água.</span>
+            </li>
+            <li class="li">
+              <div class="k"><b>Melhoria da qualidade de vida urbana</b><span class="badge">Cidade</span></div>
+              <span class="muted">Ambientes mais limpos, seguros e resilientes para a comunidade.</span>
+            </li>
+          </ul>
+
+          <div class="callout">
+            <div class="icon" aria-hidden="true"></div>
+            <div>
+              <b>Resultado esperado</b>
+              <p>A adoção de práticas sustentáveis contribui diretamente para cidades mais resilientes e saudáveis.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="conclusao" class="card">
+          <h3>7. Conclusão</h3>
+          <p>
+            Pequenas atitudes individuais geram grandes impactos coletivos. O descarte correto de resíduos
+            deve ser compreendido como responsabilidade social e ambiental.
+          </p>
+
+          <div class="quote" role="note" aria-label="Mensagem final">
+            <p>“Cuide do seu lixo, cuide do seu futuro.”</p>
+            <small>— EcoSaúde Digital</small>
+          </div>
+        </section>
+
+        <section id="referencias" class="card">
+          <h3>Referências</h3>
+          <ol class="refs">
+            <li>ONU – Organização das Nações Unidas. Relatórios de Sustentabilidade Ambiental.</li>
+            <li>SACHS, I. Desenvolvimento sustentável.</li>
+            <li>VEIGA, J. E. Desenvolvimento sustentável: o desafio do século XXI.</li>
+            <li>IANOSKI, T. Educação ambiental e gestão urbana.</li>
+          </ol>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Voltar ao topo">↑ Topo</button>
+
+  <script>
+    // Voltar ao topo (aparece ao rolar)
+    const toTop = document.getElementById('toTop');
+    const onScroll = () => {
+      if (window.scrollY > 500) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    toTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Imprimir / PDF
+    document.getElementById('btnImprimir').addEventListener('click', () => window.print());
+  </script>
+</body>
+</html>
